@@ -1,8 +1,10 @@
 FROM huggla/postgis-alpine
 
-VOLUME /overlay/lowerdir /mnt:/overlay/hostdir
+COPY ./bin/pre-entry.sh /usr/local/bin/pre-entry.sh
+
+RUN chmod ugo+x /usr/local/bin/pre-entry.sh
 
 WORKDIR /var/lib/postgresql/data/pgdata
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["mkdir -p /overlay/hostdir/`hostname`-upperdir /overlay/hostdir/`hostname`-workdir && mount -t overlay overlay -o lowerdir=/overlay/lowerdir,upperdir=/overlay/hostdir/`hostname`-upperdir,workdir=/overlay/hostdir/`hostname`-workdir /var/lib/postgresql/data/pgdata && docker-entrypoint.sh postgres"]
+CMD ["pre-entry.sh && docker-entrypoint.sh postgres"]
