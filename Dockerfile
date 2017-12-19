@@ -1,4 +1,4 @@
-FROM huggla/postgis-alpine:20071213
+FROM huggla/postgis-alpine:20171213
 
 COPY ./bin/pre-entry.sh /usr/local/bin/pre-entry.sh
 
