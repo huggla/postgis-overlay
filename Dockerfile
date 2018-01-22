@@ -8,5 +8,4 @@ RUN chmod ugo+x /usr/local/bin/pre-entry.sh \
  
 ENV PGDATA /tmp/pgdata
 
-ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["pre-entry.sh && docker-entrypoint.sh postgres"]
+ENTRYPOINT ["/usr/local/bin/pre-entry.sh"]
